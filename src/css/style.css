@@ -8,6 +8,7 @@ img {
 .container {
   padding-left: 15px;
   padding-right: 15px;
+  padding-bottom: 25px;
 }
 
 .visually-hidden {
@@ -23,15 +24,16 @@ img {
   margin: -1px;
 }
 
+.gallery,
+.photo-card {
+  margin: 0;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 2rem;
-}
-
-.gallery,
-.photo-card {
-  margin: 0;
+  margin-bottom: 25px;
 }
 
 .photo-card {
@@ -84,4 +86,21 @@ img {
   border: none;
 
   padding: 0;
+}
+
+.load-more {
+  display: block;
+  min-width: 100px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #fff;
+  border: 3px solid rgba(62, 93, 180, 0.863);
+  border-radius: 5px;
+
+  color: rgb(62, 93, 180);
+}
+
+.load-more:hover {
+  color: #fff;
+  background-color: rgba(62, 93, 180, 0.863);
 }

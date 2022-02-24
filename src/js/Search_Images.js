@@ -21,7 +21,7 @@ export default class SearchImages {
     return this._url;
   }
 
-  search() {
+  async search() {
     const searchParams = new URLSearchParams({
       key: this.API_KEY,
       q: this.query,
@@ -32,10 +32,10 @@ export default class SearchImages {
       page: this.page,
     });
 
-    return fetch(`https://pixabay.com/api/?${searchParams}`).then(res => {
-      this._page += 1;
-      return res.json();
-    });
+    this._page += 1;
+    const response = await fetch(`https://pixabay.com/api/?${searchParams}`);
+    const pictures = await response.json();
+    return pictures;
   }
 
   resetPage() {

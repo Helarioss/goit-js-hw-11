@@ -17,7 +17,7 @@ refs.btnLoadMore.addEventListener('click', loadMore);
 const searchImages = new SearchImages();
 const lightbox = new SimpleLightbox('div.gallery a');
 
-function onSubmit(event) {
+async function onSubmit(event) {
   event.preventDefault();
 
   const query = event.currentTarget.elements.searchQuery.value.trim();
@@ -30,25 +30,25 @@ function onSubmit(event) {
 
   searchImages.query = query;
   searchImages.resetPage();
-  searchImages
-    .search()
-    .then(images => {
-      renderImages(images);
 
-      Notify.success(`Hooray! We found ${images.totalHits} images.`);
-      refs.btnLoadMore.classList.remove('visually-hidden');
-    })
-    .catch(console.log);
+  try {
+    const images = await searchImages.search();
+    renderImages(images);
+    Notify.success(`Hooray! We found ${images.totalHits} images.`);
+    refs.btnLoadMore.classList.remove('visually-hidden');
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function loadMore() {
-  searchImages
-    .search()
-    .then(images => {
-      renderImages(images);
-      scroll();
-    })
-    .catch(console.log);
+async function loadMore() {
+  try {
+    const images = await searchImages.search();
+    renderImages(images);
+    scroll();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function renderImages(images) {
